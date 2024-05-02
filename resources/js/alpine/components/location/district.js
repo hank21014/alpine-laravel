@@ -15,7 +15,7 @@ import { toChoices, createSelectedPlaceHolderChoice } from "@/utils/choice";
                     // 等待dom渲染完成, 才存取this.$data.city和this.$data.district
                     await this.$nextTick();
                     this.choice = this.createChoice(choiceOptions);
-                    this.$data.district ??= value;
+                    this.$data.district ??= parseInt(value);
 
                     // 有設置city, 載入district選項
                     if (this.$data.city !== null) {
@@ -47,7 +47,7 @@ import { toChoices, createSelectedPlaceHolderChoice } from "@/utils/choice";
                             return;
                         }
 
-                        if (!this.$data.isSync) {
+                        if (!this.$data.shouldResetDistrict) {
                             this.$data.district = null;
                         }
 

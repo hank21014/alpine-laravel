@@ -16,10 +16,8 @@
             init(){
                 this.$watch('isSync', value => {
                     if(!value) return;
-                    this.$component('#test').sync({
-                      city: this.cityUlid1,
-                      district:this.districtUlid1,
-                    });
+                    this.$component('#test').updateCityWithoutResetDistrict(this.cityUlid1);
+                    this.districtUlid2 = this.districtUlid1;
                 });
                 
                 // 不須同步 || 兩值相等，直接結束
@@ -52,11 +50,15 @@
     >
       <h3>戶籍地址</h3>
       <x-location.wrapper>
+        {{-- <x-location.city value="0"/>
+        <x-location.district value="3"/> --}}
         <x-location.city x-model="cityUlid1"/>
         <x-location.district x-model="districtUlid1"/>
       </x-location.wrapper>
       <h3>通訊地址</h3>
       <x-location.wrapper id="test">
+        {{-- <x-location.city value="1"/>
+        <x-location.district value="6"/> --}}
         <x-location.city x-model="cityUlid2"/>
         <x-location.district x-model="districtUlid2"/>
       </x-location.wrapper>

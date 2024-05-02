@@ -7,12 +7,12 @@ import init from "@/alpine/init.js";
             city: null,
             district: null,
             isSync: false,
-            sync({ city, district }) {
-                this.isSync = true;
+            shouldResetDistrict: false,
+            updateCityWithoutResetDistrict(city) {
+                this.shouldResetDistrict = true;
                 this.city = city;
-                this.district = district;
                 // dom渲染完再改變
-                this.$nextTick(() => (this.isSync = false));
+                this.$nextTick(() => (this.shouldResetDistrict = false));
             },
         }));
     }))();

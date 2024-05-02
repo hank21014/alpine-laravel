@@ -12,9 +12,11 @@ import { getCities } from "@/api/location";
             async init() {
                 // 等待dom渲染完成, 才存取this.$data.city和this.$data.district
                 await this.$nextTick();
-                this.choice = await this.createChoice(choiceOptions);
                 // 設置已選擇的city
-                this.$data.city ??= value;
+                if (value !== null) {
+                    this.$data.updateCityWithoutResetDistrict(parseInt(value));
+                }
+                this.choice = await this.createChoice(choiceOptions);
                 this.choice.setChoiceByValue(this.$data.city);
 
                 // x-model情境: 當city改變要重設選擇的選項
